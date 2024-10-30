@@ -1,0 +1,23 @@
+.navbar{
+    background-color: rgb(119, 77, 47);
+}
+
+.navbar a {
+    color: #000000 !important;
+}
+
+.active{
+    background-color: #ffffff !important;
+    color: rgb(119, 77, 47) !important;
+    box-shadow: -5px 3px 36px -20px rgba(0,0,0,0.75) inset;
+    font-weight: 700 !important;
+    border: none !important;
+}
+
+.admin{
+    background-color: #ffffff !important;
+    color: rgb(119, 77, 47) !important;
+    box-shadow: -5px 3px 36px -20px rgba(0,0,0,0.75) inset;
+    font-weight: 700 !important;
+    border: none !important;
+}
