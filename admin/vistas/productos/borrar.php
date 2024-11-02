@@ -1,28 +1,17 @@
-<?php 
-/*
-Contenido:
+<?php
+require_once "../../../includes/database.php";
 
-Confirmación de Eliminación (opcional):
-Un pequeño formulario o mensaje para confirmar si realmente se desea eliminar el producto.
-*/
-
-require 'includes/data.php';
-
-// Eliminar el Producto:
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $id = $_POST['id'];
-    unset($productos[$id]);
-    $productos = array_values($productos); // Reindexar el array
-    file_put_contents('data.json', json_encode($productos, JSON_PRETTY_PRINT));
-    header('Location: index.php');
+
+    try {
+        $conexion = conectarBaseDatos();
+        $sql = "DELETE FROM productos WHERE id = :id";
+        $stmt = $conexion->prepare($sql);
+        $stmt->execute([':id' => $id]);
+        echo '<div class="alert alert-success">Producto con ID ' . $id . ' borrado exitosamente.</div>';
+    } catch (PDOException $e) {
+        echo '<div class="alert alert-danger">Error al borrar el producto: ' . $e->getMessage() . '</div>';
+    }
 }
 ?>
-
-<!-- Formulario para confirmar la eliminación -->
-
-<form method="POST" action="borrar.php">
-    <input type="hidden" name="id" value="<?php echo $_POST['id']; ?>">
-    <p>¿Estás seguro de que deseas eliminar este producto?</p>
-    <button type="submit">Sí, eliminar</button>
-    <a href="index.php">Cancelar</a>
-</form>

@@ -4,6 +4,8 @@
 
 .navbar a {
     color: #000000 !important;
+    font-weight: 500 !important;
+
 }
 
 .active{
@@ -14,8 +16,8 @@
     border: none !important;
 }
 
-.admin{
-    background-color: #ffffff !important;
+a.admin{
+    background-color: #E1872C !important;
     color: rgb(119, 77, 47) !important;
     box-shadow: -5px 3px 36px -20px rgba(0,0,0,0.75) inset;
     font-weight: 700 !important;
