@@ -32,13 +32,16 @@ function verificarAdmin($mensajeAdmin, $mensajePublico) {
                 <div class="d-none d-md-inline-block">
                     <ul class="nav nav-pills">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Active</a>
+                            <a class="nav-link active" aria-current="page" href="./index.php">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                            <a class="nav-link" <?php echo verificarAdmin("href='./productos.php'>Productos","href='#'>Productos"); ?></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                            <a class="nav-link" <?php echo verificarAdmin("href='./pedidos.php'>Pedidos","href='#'>Nosotros"); ?></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" <?php echo verificarAdmin("href='./clientes.php'>Clientes","href='#'>Contacto"); ?></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link admin" <?php echo verificarAdmin("href='../index.php'>Público","href='./admin/index.php'>Admin"); ?></a>
