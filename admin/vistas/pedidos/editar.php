@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <!-- Campo Cliente -->
                 <div class="mb-3">
                     <label for="cliente_id" class="form-label text-light">Cliente</label>
-                    <select name="cliente_id" class="form-select" id="cliente_id" required>
+                    <select name="cliente_id" class="form-select" id="cliente_id" disabled>
                         <option value="">Selecciona un cliente</option>
                         <?php foreach ($clientes as $cliente): ?>
                             <option value="<?= htmlspecialchars($cliente['id']) ?>" 
@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class="mb-3 col">
                         <label for="fecha_pedido" class="form-label text-light">Fecha pedido</label>
                         <input type="datetime-local" name="fecha_pedido" class="form-control" id="fecha_pedido" 
-                            value="<?= htmlspecialchars(date('Y-m-d\TH:i', strtotime($pedido['fecha_pedido']))) ?>" required>
+                            value="<?= htmlspecialchars(date('Y-m-d\TH:i', strtotime($pedido['fecha_pedido']))) ?>" readonly>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-success w-100">Actualizar</button>
