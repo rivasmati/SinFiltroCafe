@@ -21,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ':stock' => $stock,
             ':categoria_id' => $categoria_id
         ]);
-        echo '<div class="alert alert-success">Producto creado exitosamente.</div>';
         header("refresh:2;url=../../index.php");
+        echo '<div class="alert alert-success">Producto creado exitosamente.</div>';
 
     } catch (PDOException $e) {
         echo '<div class="alert alert-danger">Error al crear el producto: ' . $e->getMessage() . '</div>';
