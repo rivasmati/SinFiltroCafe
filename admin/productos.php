@@ -24,7 +24,7 @@ $productos = listarProductos();
                     </thead>
                     <tbody>';
                         if (count($productos) > 0):
-                            echo "<a href='./vistas/productos/crear.php' class='btn btn-success mb-3 radio-100 fw-bold'>+</a><br>";
+                            echo "<a href='./vistas/producto/crear.php' class='btn btn-success mb-3 radio-100 fw-bold'>+</a><br>";
                             foreach ($productos as $producto):
                                 if ($producto['categoria_id'] == 1) {
                                     $categoria = "Café";
@@ -43,8 +43,8 @@ $productos = listarProductos();
                                     <td>" . htmlspecialchars($producto["stock"]) . "</td>
                                     <td>" . htmlspecialchars($categoria) . "</td>
                                     <td>
-                                        <a href='./vistas/productos/editar.php?id=" . htmlspecialchars($producto["id"]) . "' class='btn btn-primary'>Editar</a>
-                                        <form method='POST' action='./vistas/productos/borrar.php' class='d-inline'>
+                                        <a href='./vistas/producto/editar.php?id=" . htmlspecialchars($producto["id"]) . "' class='btn btn-primary'>Editar</a>
+                                        <form method='POST' action='./vistas/producto/borrar.php' class='d-inline'>
                                             <input type='hidden' name='id' value='" . htmlspecialchars($producto["id"]) . "'>
                                             <button type='submit' class='btn btn-danger'>Eliminar</button>
                                         </form>
@@ -61,10 +61,7 @@ $productos = listarProductos();
                     </tbody>
                 </table>
             </div>
-        </div>
-        <footer>
-        </footer>
-    </body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    </html>';
+        </div>';
+
+require_once "../includes/footer.php";
 ?>

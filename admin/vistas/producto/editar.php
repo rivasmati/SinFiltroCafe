@@ -108,6 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <p class="text-danger">ID de producto inválido.</p>
     <?php endif; ?>
 </div>
-</body>
 
-</html>
+<?php
+require_once "../../../includes/footer.php";
+?>
