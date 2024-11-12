@@ -47,13 +47,13 @@ function verificarAdmin($mensajeAdmin, $mensajePublico, $mensajeVistas) {
                             <a class="nav-link active" aria-current="page" href="./index.php">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" <?php echo verificarAdmin("href='./productos.php'>Productos","href='#'>Productos","href='./../../productos.php'>Productos"); ?></a>
+                            <a class="nav-link" <?php echo verificarAdmin("href='./productos.php'>Productos","href='./productos.php'>Productos","href='./../../productos.php'>Productos"); ?></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" <?php echo verificarAdmin("href='./pedidos.php'>Pedidos","href='#'>Nosotros","href='./../../pedidos.php'>Pedidos"); ?></a>
+                            <a class="nav-link" <?php echo verificarAdmin("href='./pedidos.php'>Pedidos","href='./nosotros.php'>Nosotros","href='./../../pedidos.php'>Pedidos"); ?></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" <?php echo verificarAdmin("href='./clientes.php'>Clientes","href='#'>Contacto","href='./../../clientes.php'>Clientes"); ?></a>
+                            <a class="nav-link" <?php echo verificarAdmin("href='./clientes.php'>Clientes","href='./contacto.php'>Contacto","href='./../../clientes.php'>Clientes"); ?></a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link admin" <?php echo verificarAdmin("href='../index.php'>Público","href='./admin/index.php'>Admin","href='../../../index.php'>Público"); ?></a>
