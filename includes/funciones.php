@@ -52,6 +52,38 @@ function listarPedidos() {
     }
 }
 
+function listarPedidosDetalle($pedido_id) {
+    try {
+        // Conectar a la base de datos
+        $conexion = conectarBaseDatos();
 
+        // Consulta para obtener los detalles del pedido específico
+        $sql = "SELECT productos.nombre AS producto_nombre, detalle_pedido.cantidad, productos.precio
+                FROM detalle_pedido
+                JOIN productos ON detalle_pedido.producto_id = productos.id
+                WHERE detalle_pedido.pedido_id = :pedido_id";
+        $stmt = $conexion->prepare($sql);
+        $stmt->execute([':pedido_id' => $pedido_id]);
+
+        // Retornar los resultados como array asociativo
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        // Manejo de errores
+        die("Error al obtener los detalles del pedido: " . $e->getMessage());
+    }
+}
+
+// Función para obtener productos con stock disponible
+function obtenerProductosConStock() {
+    try {
+        $conexion = conectarBaseDatos();
+        $sql = "SELECT id, nombre FROM productos WHERE stock > 0";
+        $stmt = $conexion->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        die("Error al obtener productos: " . $e->getMessage());
+    }
+}
 
 ?>

@@ -23,7 +23,7 @@ $pedidos = listarPedidos();
                     </thead>
                     <tbody>';
                     if (count($pedidos) > 0):
-                        echo "<a href='./vistas/pedidos/crear.php' class='btn btn-success mb-3'>Agregar Nuevo Pedido</a><br>";
+                        echo "<a href='./vistas/pedido/crear.php' class='btn btn-success mb-3'>Agregar Nuevo Pedido</a><br>";
                         foreach ($pedidos as $pedido):
                             echo "<tr>
                                 <td>" . htmlspecialchars($pedido["id"]) . "</td>
@@ -32,8 +32,11 @@ $pedidos = listarPedidos();
                                 <td>" . htmlspecialchars($pedido["medio_pago"]) . "</td>
                                 <td>" . htmlspecialchars($pedido["estado_pedido"]) . "</td>
                                 <td>
-                                    <a href='./vistas/pedidos/editar.php?id=" . htmlspecialchars($pedido["id"]) . "' class='btn btn-primary'>Editar</a>
-                                    <form method='POST' action='./vistas/pedidos/borrar.php' class='d-inline'>
+                                    <a href='./vistas/pedido/editar.php?id=" . htmlspecialchars($pedido["id"]) . "' class='btn btn-primary'>Editar</a>
+                                    <a href='detalles.php?id=" . htmlspecialchars($pedido["id"]) . "' class='btn btn-info'>
+                                        Ver Detalles
+                                    </a>
+                                    <form method='POST' action='./vistas/pedido/borrar.php' class='d-inline'>
                                         <input type='hidden' name='id' value='" . htmlspecialchars($pedido["id"]) . "'>
                                         <button type='submit' class='btn btn-danger'>Eliminar</button>
                                     </form>
@@ -49,10 +52,7 @@ $pedidos = listarPedidos();
                     </tbody>
                 </table>
             </div>
-        </div>
-        <footer>
-        </footer>
-    </body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    </html>';
+        </div>';
+
+require_once "../includes/footer.php";
 ?>

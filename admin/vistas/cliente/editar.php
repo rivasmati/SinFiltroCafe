@@ -40,8 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ':telefono' => $telefono,
             ':fecha_registro' => $fecha_registro,
         ]);
-        echo '<div class="alert alert-success align-items-center">Cliente actualizado exitosamente.</div>';
         header("refresh:2;url=../../clientes.php");
+        echo '<div class="alert alert-success align-items-center">Cliente actualizado exitosamente.</div>';
     } catch (PDOException $e) {
         echo '<div class="alert alert-danger">Error al actualizar el cliente: ' . $e->getMessage() . '</div>';
     }
@@ -85,6 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <p class="text-danger">ID de cliente inválido.</p>
     <?php endif; ?>
 </div>
-</body>
 
-</html>
+<?php
+require_once "../../../includes/footer.php";
+?>

@@ -23,7 +23,7 @@ $clientes = listarClientes();
                     </thead>
                     <tbody>';
                     if (count($clientes) > 0):
-                        echo "<a href='./vistas/clientes/crear.php' class='btn btn-success mb-3'>Agregar Nuevo Cliente</a><br>";
+                        echo "<a href='./vistas/cliente/crear.php' class='btn btn-success mb-3'>Agregar Nuevo Cliente</a><br>";
                         foreach ($clientes as $cliente):
                             echo "<tr>
                                 <td>" . htmlspecialchars($cliente["id"]) . "</td>
@@ -32,8 +32,8 @@ $clientes = listarClientes();
                                 <td>" . htmlspecialchars($cliente["telefono"]) . "</td>
                                 <td>" . htmlspecialchars($cliente["fecha_registro"]) . "</td>
                                 <td>
-                                    <a href='./vistas/clientes/editar.php?id=" . htmlspecialchars($cliente["id"]) . "' class='btn btn-primary'>Editar</a>
-                                    <form method='POST' action='./vistas/clientes/borrar.php' class='d-inline'>
+                                    <a href='./vistas/cliente/editar.php?id=" . htmlspecialchars($cliente["id"]) . "' class='btn btn-primary'>Editar</a>
+                                    <form method='POST' action='./vistas/cliente/borrar.php' class='d-inline'>
                                         <input type='hidden' name='id' value='" . htmlspecialchars($cliente["id"]) . "'>
                                         <button type='submit' class='btn btn-danger'>Eliminar</button>
                                     </form>
@@ -49,10 +49,8 @@ $clientes = listarClientes();
                     </tbody>
                 </table>
             </div>
-        </div>
-        <footer>
-        </footer>
-    </body>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    </html>';
+        </div>';
+
+require_once "../includes/footer.php";
+
 ?>

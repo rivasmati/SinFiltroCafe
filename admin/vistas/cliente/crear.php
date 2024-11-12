@@ -19,8 +19,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ':telefono' => $telefono,
             ':fecha_registro' => $fecha_registro,
         ]);
-        echo '<div class="alert alert-success">Cliente creado exitosamente.</div>';
         header("refresh:2;url=../../clientes.php");
+        echo '<div class="alert alert-success">Cliente creado exitosamente.</div>';
 
     } catch (PDOException $e) {
         echo '<div class="alert alert-danger">Error al crear el cliente: ' . $e->getMessage() . '</div>';
@@ -59,5 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </form>
         </div>
     </div>
-</body>
-</html>
+    
+<?php
+require_once "../../../includes/footer.php";
+?>
