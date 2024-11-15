@@ -8,7 +8,7 @@ require "includes/funciones.php";
 
 <main>
     <div class="container mt-5">
-      <h1 class="mb-5">Nuestros productos</h1>
+      <h1 class="p-5">Nuestros productos</h1>
       <div class="row row-cols-2 row-cols-lg-4 row-cols-md-3" id="product-list"></div>
       <div id="smartcart" class="align-items-start"></div>
     </div>

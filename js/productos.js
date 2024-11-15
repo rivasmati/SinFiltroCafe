@@ -24,19 +24,24 @@ $(document).ready(function() {
             // Iterar sobre productosSmartCart para crear los elementos HTML de cada producto
             productosSmartCart.forEach(product => {
                 const productItem = `
-                    <div class="sc-product-item thumbnail mb-4">
-                        <img class="img-fluid" data-name="product_image" src="${product.product_image}" alt="${product.product_name}">
-                        <h5 class="mt-2" data-name="product_name">${product.product_name}</h5>
-                        <p data-name="product_desc">${product.product_description}</p>
-                        <p>Precio: $${product.product_price}</p>
-                        <div class="form-group2">
-                            <input class="sc-cart-item-qty" name="product_quantity" min="1" value="1" type="number">
+                <div class="container m-auto">
+                    <div class="card h-100 shadow-sm mb-4 sc-product-item thumbnail">
+                       <!-- <img class="card-img-top img-fluid" data-name="product_image" src="${product.product_image}" alt="${product.product_name}"> -->
+                       <img class="img-fluid" data-name="product_image" src="./img/productos/espresso.png" alt="café">
+                        <h5 class="card-title m-auto" data-name="product_name">${product.product_name}</h5>
+                        <p class="card-text m-auto mb-2" data-name="product_desc">${product.product_description}</p>
+                        <div class="row row-cols-2 m-auto">
+                            <div class="col form-group2 d-flex justify-content-between align-items-center mb-3">
+                                <input class="w-100 sc-cart-item-qty form-control" name="product_quantity" min="1" value="1" type="number">
+                            </div>
+                            <p class="col p-2">Precio: $${product.product_price}</p>
                         </div>
                         <input name="product_price" value="${product.product_price}" type="hidden" />
                         <input name="product_id" value="${product.product_id}" type="hidden" />
 
-                        <button class="sc-add-to-cart btn btn-primary">Agregar al Carrito</button>
+                        <button class="m-2 sc-add-to-cart btn btn-warning">Agregar +</button>
                     </div>
+                </div>
                 `;
                 productContainer.append(productItem);
             });
