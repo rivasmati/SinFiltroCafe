@@ -1,0 +1,72 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Estilo del cuerpo */
+body {
+    background-color: #f8f3e9; /* Color cálido de fondo */
+    color: #3a3a3a; /* Texto oscuro para mejor contraste */
+    line-height: 1.6;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que el contenido ocupe toda la pantalla */
+}
+
+/* Estilo del encabezado */
+.header {
+    background-color: #7f5539; /* Marrón oscuro para un look de café */
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* Sección principal de "Sobre Nosotros" */
+.about-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+/* Contenedor principal del contenido */
+.container {
+    max-width: 800px;
+    text-align: justify;
+    background-color: #fff; /* Fondo blanco para contraste */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave para efecto 3D */
+}
+
+/* Título principal */
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Título secundario */
+h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #7f5539; /* Marrón oscuro */
+}
+
+/* Párrafos */
+p {
+    margin-bottom: 1rem;
+}
+
+/* Estilo del pie de página */
+.footer {
+    text-align: center;
+    background-color: #7f5539; /* Mismo marrón oscuro que el encabezado */
+    color: #fff;
+    padding: 1rem;
+    font-size: 0.875rem;
+}
