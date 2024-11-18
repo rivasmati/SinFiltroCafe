@@ -6,48 +6,11 @@ require "includes/funciones.php";
 
 ?>
 <link rel="stylesheet" href="style.css"> <!-- Vincula la hoja de estilo -->
-     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
-        <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img src="img/slide1.jpg" class="d-block w-100" alt="Primer slide">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Bienvenido a Sin Filtro Café</h5>
-                    <p>El mejor café artesanal de la ciudad.</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="img/slide2.jpg" class="d-block w-100" alt="Segundo slide">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Ambiente único</h5>
-                    <p>Disfruta de un espacio acogedor y relajante.</p>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="img/slide3.jpg" class="d-block w-100" alt="Tercer slide">
-                <div class="carousel-caption d-none d-md-block">
-                    <h5>Variedad de productos</h5>
-                    <p>Desde café filtrado hasta exquisitos postres.</p>
-                </div>
-            </div>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Anterior</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Siguiente</span>
-        </a>
-    </div>
+
 
     <!-- Cards Section -->
     <div class="container mt-5">
-        <h2 class="text-center mb-4">Nuestros Productos</h2>
+        <h2 class="text-center m-4">Nuestros Productos</h2>
         <div class="row">
             <div class="col-md-3">
                 <div class="card">
