@@ -3,7 +3,9 @@ require_once "includes/database.php";
 require_once "includes/header.php";
 require "includes/funciones.php";
 
+
 ?>
+<link rel="stylesheet" href="style.css"> <!-- Vincula la hoja de estilo -->
      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -89,20 +91,51 @@ require "includes/funciones.php";
             </div>
         </div>
     </div>
-
-    <!-- About Us Section -->
-    <section id="sobre-nosotros" class="py-5 bg-light">
-        <div class="container">
-            <h2 class="text-center">Sobre Nosotros</h2>
-            <p class="text-center mt-3">
-Nos apasiona compartir la esencia del café en cada taza. Nuestra historia comenzó en Argentina, cuando Matías Rivas, Francisco Lo Guzzo, Adrián Birnbaun y Aylen Castro decidieron crear un espacio donde el aroma, el sabor y la calidez del café fueran los protagonistas. 
-
-
-Desde el inicio, nos hemos comprometido a seleccionar granos de alta calidad y a trabajar en conjunto con caficultores locales, asegurándonos de que cada sorbo refleje la dedicación y el esfuerzo que hay detrás de cada proceso. 
-
-En Sin Filtro Café, invitamos a todos a tomarse un momento para disfrutar del presente y descubrir nuevos sabores en un ambiente acogedor y auténtico..</p>
-        </div>
+    
     </section>
+
+    <!-- Coffee Grains Banner Section -->
+<section class="coffee-banner">
+    <div class="container text-center">
+        <h2 class="banner-title mt-4 mb-4">¿Cuál vas a elegir hoy?</h2>
+        <div class="banner-content d-flex justify-content-between align-items-center">
+            <!-- Left Column: Coffee Grain Descriptions -->
+            <div class="grains-left">
+                <div class="grain-item">
+                    <h5>Grano Árabe</h5>
+                    <p>Suave y aromático, ideal para disfrutar en cualquier momento.</p>
+                </div>
+                <div class="grain-item">
+                    <h5>Robusta Intenso</h5>
+                    <p>Fuerte y enérgico, perfecto para un impulso extra.</p>
+                </div>
+                <div class="grain-item">
+                    <h5>Grano Descafeinado</h5>
+                    <p>Todo el sabor del café sin cafeína, disfrútalo de noche.</p>
+                </div>
+            </div>
+            <!-- Center Image -->
+            <div class="banner-image">
+                <img src="img/productos/cafebanner.jpg" alt="Variedad de Granos de Café" class="img-fluid w-75">
+            </div>
+            <!-- Right Column: Coffee Grain Descriptions -->
+            <div class="grains-right">
+                <div class="grain-item">
+                    <h5>Grano Bourbon</h5>
+                    <p>Notas dulces y afrutadas, un clásico de gran calidad.</p>
+                </div>
+                <div class="grain-item">
+                    <h5>Geisha Premium</h5>
+                    <p>Exquisito y exótico, para los paladares más exigentes.</p>
+                </div>
+                <div class="grain-item">
+                    <h5>Blend Especial</h5>
+                    <p>Una mezcla única que resalta lo mejor de cada grano.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 
 <? require_once "includes/footer.php"; ?>
