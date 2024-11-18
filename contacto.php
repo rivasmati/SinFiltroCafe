@@ -3,9 +3,6 @@ require_once "includes/database.php";
 require_once "includes/header.php";
 require "includes/funciones.php";
 
-?>
-
-<?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = htmlspecialchars($_POST["nombre"]);
     $email = htmlspecialchars($_POST["email"]);
@@ -30,45 +27,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacto - Sin Filtro Café</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container py-5">
-       
-        <h1 class="text-center m-4">Contactanos</h1>
-        
-      
-        <?php if (isset($alerta)): ?>
-            <div class="alert alert-<?= $alerta_tipo ?>" role="alert">
-                <?= $alerta ?>
-            </div>
-        <?php endif; ?>
-        
-        
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <div class="p-4 shadow rounded bg-warning">
-                    <h3 class="text-center">Horarios y ubicación</h3>
-                    <ul class="list-group list-group-flush mt-3">
-                        <li class="list-group-item bg-warning"><strong>Lunes a Viernes:</strong> 8:00 AM - 8:00 PM</li>
-                        <li class="list-group-item bg-warning"><strong>Sábados:</strong> 9:00 AM - 8:00 PM</li>
-                        <li class="list-group-item bg-warning"><strong>Domingos:</strong> 9:00 AM - 8:00 PM</li>
-                    </ul>
-                    <div class="mt-3">
-                        <h5 class="text-center"><i class="bi bi-geo-alt-fill"></i> Nos encontramos en:</h5>
-                        <p class="text-center mb-0">Av. del Libertador 6796, Buenos Aires. </p>
-                    </div>
+<div class="container py-5">
+    <h1 class="text-center m-4">Contactanos</h1>
+    
+    <?php if (isset($alerta)): ?>
+        <div class="alert alert-<?= $alerta_tipo ?>" role="alert">
+            <?= $alerta ?>
+        </div>
+    <?php endif; ?>
+    
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="p-4 shadow rounded bg-warning">
+                <h3 class="text-center">Horarios y ubicación</h3>
+                <ul class="list-group list-group-flush mt-3">
+                    <li class="list-group-item bg-warning"><strong>Lunes a Viernes:</strong> 8:00 AM - 8:00 PM</li>
+                    <li class="list-group-item bg-warning"><strong>Sábados:</strong> 9:00 AM - 8:00 PM</li>
+                    <li class="list-group-item bg-warning"><strong>Domingos:</strong> 9:00 AM - 8:00 PM</li>
+                </ul>
+                <div class="mt-3">
+                    <h5 class="text-center"><i class="bi bi-geo-alt-fill"></i> Nos encontramos en:</h5>
+                    <p class="text-center mb-0">Av. del Libertador 6796, Buenos Aires. </p>
                 </div>
             </div>
-          
-        
-        
+        </div>
+    
         <form action="contacto.php" method="POST" class="m-auto p-4 shadow rounded bg-light col-md-6">
             <h3 class="text-center">Enviá tu consulta</h3>
             <div class="mb-3">
@@ -86,6 +69,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <button type="submit" class="btn btn-warning w-100">Enviar</button>
         </form>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+</div>
+
+
+<?php require_once "includes/footer.php"; ?>

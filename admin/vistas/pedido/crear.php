@@ -7,7 +7,7 @@ $conexion = conectarBaseDatos();
 $productosDisponibles = obtenerProductosConStock();
 
 try {
-    $sqlClientes = "SELECT id, nombre FROM clientes";
+    $sqlClientes = "SELECT id, nombre, email, telefono FROM clientes";
     $stmtClientes = $conexion->query($sqlClientes);
     $clientes = $stmtClientes->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
@@ -15,17 +15,43 @@ try {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $cliente_id = $_POST['cliente_id'];
-    $fecha_pedido = $_POST['fecha_pedido'];
-    $medio_pago = $_POST['medio_pago'];
-    $estado_pedido = $_POST['estado_pedido'];
-    $productosPedido = $_POST['productos'] ?? [];  // Array de productos con sus cantidades
+    $email = $_POST['email'];
+    $nombre = $_POST['nombre'];
+    $telefono = $_POST['telefono'];
+    $cliente_id = null;
 
     try {
-        $sql = "INSERT INTO pedidos (cliente_id, fecha_pedido, medio_pago, estado_pedido) 
-                VALUES (:cliente_id, :fecha_pedido, :medio_pago, :estado_pedido)";
-        $stmt = $conexion->prepare($sql);
-        $stmt->execute([
+        // Verificar si el cliente ya existe en la base de datos por su email
+        $sqlVerificarCliente = "SELECT id FROM clientes WHERE email = :email";
+        $stmtVerificarCliente = $conexion->prepare($sqlVerificarCliente);
+        $stmtVerificarCliente->execute([':email' => $email]);
+        $clienteExistente = $stmtVerificarCliente->fetch(PDO::FETCH_ASSOC);
+
+        if ($clienteExistente) {
+            // Si el cliente existe, usar su ID
+            $cliente_id = $clienteExistente['id'];
+        } else {
+            // Si el cliente no existe, insertarlo en la tabla clientes
+            $sqlInsertarCliente = "INSERT INTO clientes (nombre, email, telefono, fecha_registro) VALUES (:nombre, :email, :telefono, NOW())";
+            $stmtInsertarCliente = $conexion->prepare($sqlInsertarCliente);
+            $stmtInsertarCliente->execute([
+                ':nombre' => $nombre,
+                ':email' => $email,
+                ':telefono' => $telefono,
+            ]);
+            $cliente_id = $conexion->lastInsertId();
+        }
+
+        // Código para crear el pedido utilizando $cliente_id
+        $fecha_pedido = $_POST['fecha_pedido'];
+        $medio_pago = $_POST['medio_pago'];
+        $estado_pedido = $_POST['estado_pedido'];
+        $productosPedido = $_POST['productos'] ?? [];  // Array de productos con sus cantidades
+
+        $sqlPedido = "INSERT INTO pedidos (cliente_id, fecha_pedido, medio_pago, estado_pedido) 
+                      VALUES (:cliente_id, :fecha_pedido, :medio_pago, :estado_pedido)";
+        $stmtPedido = $conexion->prepare($sqlPedido);
+        $stmtPedido->execute([
             ':cliente_id' => $cliente_id,
             ':fecha_pedido' => $fecha_pedido,
             ':medio_pago' => $medio_pago,
@@ -45,34 +71,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ]);
         }
 
-        header("refresh:2;url=../../pedidos.php");
-        #include "../../../includes/toasts.php";
-        #echo '<div class="alert alert-success">Pedido creado exitosamente.</div>';
-        echo "<script>document.addEventListener('DOMContentLoaded', function() { var toastSuccess = new bootstrap.Toast(document.getElementById('toastSuccess')); toastSuccess.show(); });</script>";
+        header("refresh:1.5;url=../../pedidos.php");
     } catch (PDOException $e) {
-        #echo '<div class="alert alert-danger">Error al crear el pedido: ' . $e->getMessage() . '</div>';
-        echo "<script>document.addEventListener('DOMContentLoaded', function() { var toastError = new bootstrap.Toast(document.getElementById('toastError')); toastError.show(); });</script>";
-    }
-    
 
-}
+    }
+}    
+
 ?>
 
-    <div class="container mt-5">
+<div class="container mt-5">
     <h1 class="text-center mb-4">Crear pedido</h1>
     <?= include "../../../includes/atras.php"; ?>
         <div class="row">
             <form method="POST" action="crear.php" class="shadow p-4 rounded bg-dark col-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3">
+                
+                <!-- Campo Email con datalist -->
                 <div class="mb-3">
-                    <label for="cliente_id" class="form-label text-light">Cliente</label>
-                    <select name="cliente_id" class="form-select" id="cliente_id" required>
-                        <option value="">Selecciona un cliente</option>
+                    <label for="email" class="form-label text-light">Email del Cliente</label>
+                    <input list="emailList" name="email" class="form-control" id="email" required>
+                    <datalist id="emailList">
                         <?php foreach ($clientes as $cliente): ?>
-                            <option value="<?= htmlspecialchars($cliente['id']) ?>">
-                                <?= htmlspecialchars($cliente['nombre']) ?>
-                            </option>
+                            <option value="<?= htmlspecialchars($cliente['email']) ?>"></option>
                         <?php endforeach; ?>
-                    </select>                </div>
+                    </datalist>
+                </div>
+
+                <!-- Campos Nombre y Teléfono, que se completarán automáticamente si el email existe -->
+                <div class="mb-3">
+                    <label for="nombre" class="form-label text-light">Nombre</label>
+                    <input type="text" name="nombre" class="form-control" id="nombre" required>
+                </div>
+                <div class="mb-3">
+                    <label for="telefono" class="form-label text-light">Teléfono</label>
+                    <input type="text" name="telefono" class="form-control" id="telefono" required>
+                </div>
+
+                <!-- Resto del formulario (estado del pedido, medio de pago, fecha del pedido, etc.) -->
                 <div class="mb-3">
                     <label for="estado_pedido" class="form-label text-light">Estado</label>
                     <select name="estado_pedido" class="form-select" id="estado_pedido" required>
@@ -124,6 +158,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
     </div>
 
+<?php
+require_once "../../../includes/footer.php";
+?>
+
 <script>
     // Configurar el campo de fecha para que tenga la fecha y hora actual
     document.getElementById('fecha_pedido').value = new Date().toISOString().slice(0, 16);
@@ -163,30 +201,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             contador++;
         });
     });
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        const clientes = <?= json_encode($clientes); ?>; // Pasar los clientes como JSON al script
+        const emailInput = document.getElementById('email');
+        const nombreInput = document.getElementById('nombre');
+        const telefonoInput = document.getElementById('telefono');
+
+        // Escuchar el cambio en el campo de email
+        emailInput.addEventListener('input', function() {
+            const emailSeleccionado = emailInput.value;
+            const cliente = clientes.find(c => c.email === emailSeleccionado);
+
+            if (cliente) {
+                // Si el cliente existe, completar los campos de nombre y teléfono
+                nombreInput.value = cliente.nombre;
+                telefonoInput.value = cliente.telefono;
+            } else {
+                // Si el cliente no existe, limpiar los campos de nombre y teléfono
+                nombreInput.value = '';
+                telefonoInput.value = '';
+            }
+        });
+    });
 </script>
-
-<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1050;">
-    <!-- Toast de Éxito -->
-    <div id="toastSuccess" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="d-flex">
-            <div class="toast-body">
-                Pedido creado exitosamente.
-            </div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-    </div>
-
-    <!-- Toast de Error -->
-    <div id="toastError" class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="d-flex">
-            <div class="toast-body">
-                Error al crear el pedido: <?= htmlspecialchars($e->getMessage() ?? '') ?>
-            </div>
-            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
-        </div>
-    </div>
-</div>
-
-<?php
-require_once "../../../includes/footer.php";
-?>

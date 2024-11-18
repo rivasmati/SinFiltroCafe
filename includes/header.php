@@ -56,7 +56,7 @@ function verificarAdmin($mensajeAdmin, $mensajePublico, $mensajeVistas) {
                             <a class="nav-link" <?php echo verificarAdmin("href='./clientes.php'>Clientes","href='./contacto.php'>Contacto","href='./../../clientes.php'>Clientes"); ?></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link admin" <?php echo verificarAdmin("href='../index.php'>Público","href='./admin/index.php'>Admin","href='../../../index.php'>Público"); ?></a>
+                            <a class="nav-link admin" <?php echo verificarAdmin("href='../index.php'>Público","href='./admin/login.php'>Admin","href='../../../index.php'>Público"); ?></a>
                         </li>
                     </ul>
                 </div>
@@ -85,7 +85,7 @@ function verificarAdmin($mensajeAdmin, $mensajePublico, $mensajeVistas) {
                             <a class="nav-link" <?php echo verificarAdmin("href='./clientes.php'>Clientes","href='#'>Contacto","href='./../../clientes.php'>Clientes"); ?></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link admin" <?php echo verificarAdmin("href='../index.php'>Público","href='./admin/index.php'>Admin","href='../../../index.php'>Público"); ?></a>
+                            <a class="nav-link admin" <?php echo verificarAdmin("href='../index.php'>Público","href='./admin/login.php'>Admin","href='../../../index.php'>Público"); ?></a>
                         </li>
                         </ul>
                     </div>

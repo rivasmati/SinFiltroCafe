@@ -1,3 +1,40 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo del cuerpo */
+body {
+    background-color: #f8f3e9; /* Color cálido de fondo */
+    color: #3a3a3a; /* Texto oscuro para mejor contraste */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que el contenido ocupe toda la pantalla */
+}
+
+/* Sección principal de "Sobre Nosotros" */
+.about-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Contenedor principal del contenido */
+.container-nosotros {
+    max-width: 800px;
+    text-align: justify;
+    background-color: #fff; /* Fondo blanco para contraste */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave para efecto 3D */
+}
+
+/* Título secundario */
+h2 {
+    color: #7f5539; /* Marrón oscuro */
+}
+
 .navbar{
     background-color: rgb(119, 77, 47);
 }
@@ -23,3 +60,47 @@ a.admin{
     font-weight: 700 !important;
     border: none !important;
 }
+
+footer p{
+    margin-bottom: 0;
+}
+
+/* LogIn */
+.login-container {
+    display: flex;
+    height: 100vh;
+    background-color: #f8f3e8; /* Fondo color café claro */
+}
+.login-bg {
+    background-image: url('ruta/a/tu/imagen.jpg'); /* Ruta a la imagen de fondo */
+    background-size: cover;
+    background-position: center;
+    width: 70%;
+}
+.login-form {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #d8c3a5; /* Tonos de marrón */
+}
+.login-form h2 {
+    color: #6b4226; /* Marrón oscuro */
+    font-weight: bold;
+}
+.form-control, .btn {
+    border-radius: 0;
+}
+.btn-primary {
+    background-color: #8e5e3d;
+    border: none;
+}
+.btn-primary:hover {
+    background-color: #6b4226;
+}
+.alert {
+    color: #842029;
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+} 
