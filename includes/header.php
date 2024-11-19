@@ -60,9 +60,10 @@ function verificarAdmin($mensajeAdmin, $mensajePublico, $mensajeVistas) {
                         </li>
                     </ul>
                 </div>
-                <a href="./index.php" class="justify-content-center align-items-center p-0 m-0">
-                    <img <?php echo verificarAdmin("src='../img/iconos/sinfiltrocafe_logo.svg'","src='./img/iconos/sinfiltrocafe_logo.svg'","src='../../../img/iconos/sinfiltrocafe_logo.svg'"); ?> alt="Logo" width="36" height="36" class="img-fluid">
+                <a href="../productos.php" class="justify-content-center align-items-center p-0 m-0">
+                    <img <?php echo verificarAdmin("src='../img/iconos/sinfiltrocafe_logo.svg'","src='./img/iconos/carrito.svg'","src='../../../img/iconos/sinfiltrocafe_logo.svg'"); ?> alt="Logo" width="32" height="32" class="img-fluid">
                 </a>
+
                 <!--OffCanvas-->
                 <div class="offcanvas offcanvas-start text-bg-dark" tabindex="-1" id="offcanvas" aria-labelledby="offcanvas">
                     <div class="offcanvas-header d-flex align-items-center">

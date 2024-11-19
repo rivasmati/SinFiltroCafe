@@ -3,11 +3,8 @@ require_once "includes/database.php";
 require_once "includes/header.php";
 require "includes/funciones.php";
 
-
 ?>
-<link rel="stylesheet" href="style.css"> <!-- Vincula la hoja de estilo -->
-
-
+<section class="pt-4">
     <!-- Cards Section -->
     <div class="container mt-5">
         <h2 class="text-center m-4">Nuestros Productos</h2>
@@ -54,8 +51,7 @@ require "includes/funciones.php";
             </div>
         </div>
     </div>
-    
-    </section>
+</section>
 
     <!-- Coffee Grains Banner Section -->
 <section class="coffee-banner">
@@ -101,4 +97,4 @@ require "includes/funciones.php";
 </section>
 
 
-<? require_once "includes/footer.php"; ?>
+<?php require_once "includes/footer.php"; ?>
