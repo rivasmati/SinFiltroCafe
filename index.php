@@ -15,7 +15,7 @@ require "includes/funciones.php";
                     <div class="card-body">
                         <h5 class="card-title">Café</h5>
                         <p class="card-text">Variedad de cafes, no importa el tiempo y el lugar.</p>
-                        <a href="productos.html" class="btn btn-dark">Ver más</a>
+                        <a href="productos.php" class="btn btn-dark">Ver más</a>
                     </div>
                 </div>
             </div>
@@ -25,7 +25,7 @@ require "includes/funciones.php";
                     <div class="card-body">
                         <h5 class="card-title">Bebidas</h5>
                         <p class="card-text">Suaves y refrescantes bebidas para saciar tu sed.</p>
-                        <a href="productos.html" class="btn btn-dark">Ver más</a>
+                        <a href="productos.php" class="btn btn-dark">Ver más</a>
                     </div>
                 </div>
             </div>
@@ -35,7 +35,7 @@ require "includes/funciones.php";
                     <div class="card-body">
                         <h5 class="card-title">Dúlce</h5>
                         <p class="card-text">Acompaña tu antojo con algo dúlce.</p>
-                        <a href="productos.html" class="btn btn-dark">Ver más</a>
+                        <a href="productos.php" class="btn btn-dark">Ver más</a>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@ require "includes/funciones.php";
                     <div class="card-body">
                         <h5 class="card-title">Salado</h5>
                         <p class="card-text">Acompaña tu antojo con algo salado.</p>
-                        <a href="productos.html" class="btn btn-dark">Ver más</a>
+                        <a href="productos.php" class="btn btn-dark">Ver más</a>
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@ require "includes/funciones.php";
             </div>
             <!-- Center Image -->
             <div class="banner-image">
-                <img src="img/productos/cafebanner.jpg" alt="Variedad de Granos de Café" class="img-fluid w-75">
+                <img src="img/banner/cafebanner.jpg" alt="Variedad de Granos de Café" class="img-fluid w-75">
             </div>
             <!-- Right Column: Coffee Grain Descriptions -->
             <div class="grains-right">
