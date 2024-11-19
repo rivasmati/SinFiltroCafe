@@ -14,7 +14,7 @@ require "includes/funciones.php";
         <div class="row">
             <div class="col-md-3">
                 <div class="card">
-                    <img src="img/productos/espresso.png" class="img-fluid card-img-top" alt="Producto 1">
+                    <img src="img/productos/cafe-leche.png" class="img-fluid card-img-top" alt="Producto 1">
                     <div class="card-body">
                         <h5 class="card-title">Café</h5>
                         <p class="card-text">Variedad de cafes, no importa el tiempo y el lugar.</p>
