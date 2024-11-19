@@ -23,7 +23,7 @@ $clientes = listarClientes();
                     </thead>
                     <tbody>';
                     if (count($clientes) > 0):
-                        echo "<a href='./vistas/cliente/crear.php' class='btn btn-success mb-3'>Agregar Nuevo Cliente</a><br>";
+                        echo "<a href='./vistas/cliente/crear.php' class='btn btn-success mb-3'>+</a><br>";
                         foreach ($clientes as $cliente):
                             echo "<tr>
                                 <td>" . htmlspecialchars($cliente["id"]) . "</td>

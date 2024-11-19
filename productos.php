@@ -6,9 +6,11 @@ require "includes/funciones.php";
 
 <main>
     <div class="container mt-5">
-      <h1 class="p-5">Nuestros productos</h1>
-      <div class="row row-cols-2 row-cols-lg-4 row-cols-md-3" id="product-list"></div>
-      <div id="smartcart" class="align-items-start"></div>
+      <h1 class="p-3">Nuestros productos</h1>
+      <div class="row row-cols-2 row-cols-lg-4 row-cols-md-3 mb-4" id="product-list"></div>
+      <form action="./admin/vistas/pedido/crear.php" method="POST"> 
+        <div id="smartcart" class="align-items-start w-50"></div>
+      </form>
     </div>
 </main>
 

@@ -4,7 +4,7 @@ require_once "database.php";
 function obtenerProductos() {
     try {
         $conexion = conectarBaseDatos();
-        $sql = "SELECT id, nombre, descripcion, precio FROM productos";
+        $sql = "SELECT id, nombre, descripcion, precio, imagen FROM productos";
         $stmt = $conexion->prepare($sql);
         $stmt->execute();
         $productos = $stmt->fetchAll(PDO::FETCH_ASSOC);

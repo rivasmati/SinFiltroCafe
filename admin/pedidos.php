@@ -23,7 +23,7 @@ $pedidos = listarPedidos();
                     </thead>
                     <tbody>';
                     if (count($pedidos) > 0):
-                        echo "<a href='./vistas/pedido/crear.php' class='btn btn-success mb-3'>Agregar Nuevo Pedido</a><br>";
+                        echo "<a href='./vistas/pedido/crear.php' class='btn btn-success mb-3'>+</a><br>";
                         foreach ($pedidos as $pedido):
                             echo "<tr>
                                 <td>" . htmlspecialchars($pedido["id"]) . "</td>

@@ -72,7 +72,7 @@ footer p{
     background-color: #f8f3e8; /* Fondo color café claro */
 }
 .login-bg {
-    background-image: url('ruta/a/tu/imagen.jpg'); /* Ruta a la imagen de fondo */
+    background-image: url('../img/banner/cafebanner.jpg'); /* Ruta a la imagen de fondo */
     background-size: cover;
     background-position: center;
     width: 70%;

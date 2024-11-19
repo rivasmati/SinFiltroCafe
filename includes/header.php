@@ -19,6 +19,9 @@ function verificarAdmin($mensajeAdmin, $mensajePublico, $mensajeVistas) {
         return $mensajePublico;
     }
 }
+
+// Obtener el nombre del archivo actual
+$paginaActual = basename($_SERVER['SCRIPT_NAME']);
 ?>
 
 <!DOCTYPE html>
@@ -27,6 +30,7 @@ function verificarAdmin($mensajeAdmin, $mensajePublico, $mensajeVistas) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sin Filtro Café</title>
+    <link rel="icon" href="./img/iconos/sinfiltrocafe_logo.svg" type="image/x-icon">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" <?php echo verificarAdmin("href='../styles/style.css'","href='./styles/style.css'","href='../../../styles/style.css'"); ?>>
@@ -43,24 +47,24 @@ function verificarAdmin($mensajeAdmin, $mensajePublico, $mensajeVistas) {
                 </a>
                 <div class="d-none d-md-inline-block">
                     <ul class="nav nav-pills">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="./index.php">Inicio</a>
+                    <li class="nav-item">
+                            <a class="nav-link <?= $paginaActual == 'index.php' ? 'active' : '' ?>" aria-current="page" href="./index.php">Inicio</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" <?php echo verificarAdmin("href='./productos.php'>Productos","href='./productos.php'>Productos","href='./../../productos.php'>Productos"); ?></a>
+                            <a class="nav-link <?= $paginaActual == 'productos.php' ? 'active' : '' ?>" <?php echo verificarAdmin("href='./productos.php'>Productos","href='./productos.php'>Productos","href='./../../productos.php'>Productos"); ?></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" <?php echo verificarAdmin("href='./pedidos.php'>Pedidos","href='./nosotros.php'>Nosotros","href='./../../pedidos.php'>Pedidos"); ?></a>
+                            <a class="nav-link <?= $paginaActual == 'pedidos.php' ||  $paginaActual == 'nosotros.php' ? 'active' : '' ?>" <?php echo verificarAdmin("href='./pedidos.php'>Pedidos","href='./nosotros.php'>Nosotros","href='./../../pedidos.php'>Pedidos"); ?></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" <?php echo verificarAdmin("href='./clientes.php'>Clientes","href='./contacto.php'>Contacto","href='./../../clientes.php'>Clientes"); ?></a>
+                            <a class="nav-link <?= $paginaActual == 'clientes.php' ||  $paginaActual == 'contacto.php' ? 'active' : '' ?>" <?php echo verificarAdmin("href='./clientes.php'>Clientes","href='./contacto.php'>Contacto","href='./../../clientes.php'>Clientes"); ?></a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link admin" <?php echo verificarAdmin("href='../index.php'>Público","href='./admin/login.php'>Admin","href='../../../index.php'>Público"); ?></a>
+                            <a class="nav-link admin ms-3" <?php echo verificarAdmin("href='../index.php'>Público","href='./admin/login.php'>Admin","href='../../../index.php'>Público"); ?></a>
                         </li>
                     </ul>
                 </div>
-                <a href="../productos.php" class="justify-content-center align-items-center p-0 m-0">
+                <a href="./productos.php" class="justify-content-center align-items-center p-0 m-0">
                     <img <?php echo verificarAdmin("src='../img/iconos/sinfiltrocafe_logo.svg'","src='./img/iconos/carrito.svg'","src='../../../img/iconos/sinfiltrocafe_logo.svg'"); ?> alt="Logo" width="32" height="32" class="img-fluid">
                 </a>
 
