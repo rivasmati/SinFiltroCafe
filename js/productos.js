@@ -56,11 +56,7 @@ $(document).ready(function() {
                         cartEmpty: 'Carrito vacío!<br />Elegí tus productos.'
                     },  
                     cartItemTemplate: 
-                    '<h4 class="list-group-item-heading">{product_name}</h4> <input type="hidden" name="productos[${productIndex}][producto_id]" value="{product_id}" /> <input type="hidden" name="productos[${productIndex}][cantidad]" value="{product_quantity}" />',    
-                    // Incrementar el índice después de agregar un producto
-                    onAdd: function() {
-                        productIndex++;
-                    }
+                    '<h4 class="list-group-item-heading">{product_name}</h4> <input type="hidden" name="productos[${productIndex++}][producto_id]" value="{product_id}" /> <input type="hidden" name="productos[${productIndex++}][cantidad]" value="{display_quantity}"/>',    
                 })
         },
         error: function(xhr, status, error) {
