@@ -84,8 +84,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ]);
         }
 
-        header("refresh:2;url=../../pedidos.php");
         echo '<div class="alert alert-success align-items-center">pedido actualizado exitosamente.</div>';
+        echo '<script>setTimeout(() => { window.location.href = "../../pedidos.php"; }, 1500);</script>';
     } catch (PDOException $e) {
         echo '<div class="alert alert-danger">Error al actualizar el pedido: ' . $e->getMessage() . '</div>';
     }

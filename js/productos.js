@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    let productIndex = 0;
     // Hacer una solicitud AJAX para obtener los productos de la base de datos
     $.ajax({
         url: './includes/obtener_productos.php', // Asegúrate de que esta ruta sea correcta
@@ -25,11 +26,11 @@ $(document).ready(function() {
             productosSmartCart.forEach(product => {
                 const productItem = `
                 <div class="my-2">
-                    <div class="card h-100 shadow-sm mb-4 p-2 sc-product-item thumbnail" style="height=400px">
+                    <div class="card h-100 shadow-sm mb-4 p-2 sc-product-item thumbnail d-flex justify-content-between">
                         <div class="h-50 p-1 d-flex align-items.center"><img class="card-img-top img-fluid h-100" data-name="product_image" src="${product.product_image}" alt="${product.product_name}" style="max-height=50px"></div>
-                        <h5 class="card-title m-auto text-truncate" data-name="product_name">${product.product_name}</h5>
-                        <p class="card-text m-auto mb-2 text-wrap text-center" data-name="product_desc">${product.product_description}</p>
-                        <div class="row row-cols-2 m-auto">
+                        <h5 class="card-title text-center m-1 text-truncate" data-name="product_name">${product.product_name}</h5>
+                        <p class="card-text m-1 text-wrap text-center" data-name="product_desc">${product.product_description}</p>
+                        <div class="row row-cols-2 m-1">
                             <div class="col form-group2 d-flex justify-content-between align-items-center mb-0">
                                 <input class="w-100 sc-cart-item-qty form-control" name="product_quantity" min="1" value="1" type="number">
                             </div>
@@ -54,6 +55,12 @@ $(document).ready(function() {
                         cartRemove: '×',
                         cartEmpty: 'Carrito vacío!<br />Elegí tus productos.'
                     },  
+                    cartItemTemplate: 
+                    '<h4 class="list-group-item-heading">{product_name}</h4> <input type="hidden" name="productos[${productIndex}][producto_id]" value="{product_id}" /> <input type="hidden" name="productos[${productIndex}][cantidad]" value="{product_quantity}" />',    
+                    // Incrementar el índice después de agregar un producto
+                    onAdd: function() {
+                        productIndex++;
+                    }
                 })
         },
         error: function(xhr, status, error) {

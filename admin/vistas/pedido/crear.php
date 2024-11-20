@@ -5,6 +5,7 @@ require_once "../../../includes/funciones.php";
 
 $conexion = conectarBaseDatos();
 $productosDisponibles = obtenerProductosConStock();
+$origen = $_GET['origen'] ?? null;
 
 try {
     $sqlClientes = "SELECT id, nombre, email, telefono FROM clientes";
@@ -70,10 +71,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 ':cantidad' => $producto['cantidad']
             ]);
         }
-
-        header("refresh:1.5;url=../../pedidos.php");
+        
+        if ($origen === 'pedido') {
+            echo '<script>setTimeout(() => { window.location.href = "../../../index.php"; }, 100);</script>';
+        } else {
+            echo '<div class="alert alert-success align-items-center">Pedido creado exitosamente.</div>';
+            echo '<script>setTimeout(() => { window.location.href = "../../pedidos.php"; }, 1500);</script>';
+        }
+        exit;
     } catch (PDOException $e) {
-
+        echo '<div class="alert alert-danger">Error al crear el pedido</div>';
     }
 }    
 
@@ -152,7 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </div>
                         </div>
                     </div>
-                <button type="submit" class="btn btn-primary w-100 mt-3">Crear Pedido</button>
+                <a href="../../pedidos.php"><button type="submit" class="btn btn-primary w-100 mt-3">Crear Pedido</button></a>
                 <!--<a href="../../index.php"><button type="submit" class="btn btn-primary w-100">Crear pedido</button></a>-->
             </form>
         </div>

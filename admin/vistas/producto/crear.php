@@ -9,34 +9,56 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stock = $_POST['stock'];
     $categoria_id = $_POST['categoria_id'];
 
-    try {
-        $conexion = conectarBaseDatos();
-        $sql = "INSERT INTO productos (nombre, descripcion, precio, stock, categoria_id) 
-                VALUES (:nombre, :descripcion, :precio, :stock, :categoria_id)";
-        $stmt = $conexion->prepare($sql);
-        $stmt->execute([
-            ':nombre' => $nombre,
-            ':descripcion' => $descripcion,
-            ':precio' => $precio,
-            ':stock' => $stock,
-            ':categoria_id' => $categoria_id
-        ]);
-        header("refresh:2;url=../../index.php");
-        echo '<div class="alert alert-success">Producto creado exitosamente.</div>';
+    // Verificar si el archivo fue subido correctamente y existe en $_FILES
+    if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === UPLOAD_ERR_OK) {
+        $imagen = $_FILES['imagen'];
+        
+        // Ruta de la carpeta donde guardar las imágenes
+        $carpetaDestino = '../../../img/productos/';
+        
+        // Verificar si la carpeta de destino existe; si no, crearla
+        if (!is_dir($carpetaDestino)) {
+            mkdir($carpetaDestino, 0777, true);
+        }
 
-    } catch (PDOException $e) {
-        echo '<div class="alert alert-danger">Error al crear el producto: ' . $e->getMessage() . '</div>';
+        // Procesar y mover la imagen
+        $nombreImagen = basename($imagen['name']);
+        $rutaImagen = $carpetaDestino . $nombreImagen;
+
+        if (move_uploaded_file($imagen['tmp_name'], $rutaImagen)) {
+            try {
+                $conexion = conectarBaseDatos();
+                $sql = "INSERT INTO productos (nombre, descripcion, precio, stock, categoria_id, imagen) 
+                        VALUES (:nombre, :descripcion, :precio, :stock, :categoria_id, :imagen)";
+                $stmt = $conexion->prepare($sql);
+                $stmt->execute([
+                    ':nombre' => $nombre,
+                    ':descripcion' => $descripcion,
+                    ':precio' => $precio,
+                    ':stock' => $stock,
+                    ':categoria_id' => $categoria_id,
+                    ':imagen' => $nombreImagen  // Usamos el nombre de la imagen en lugar del array completo
+                ]);
+                echo '<div class="alert alert-success">Producto creado exitosamente.</div>';
+                echo '<script>setTimeout(() => { window.location.href = "../../productos.php"; }, 1500);</script>';
+            } catch (PDOException $e) {
+                echo '<div class="alert alert-danger">Error al crear el producto: ' . $e->getMessage() . '</div>';
+            }
+        } else {
+            echo '<div class="alert alert-danger">Error al mover la imagen al directorio de destino.</div>';
+        }
+    } else {
+        echo '<div class="alert alert-danger">Error al subir la imagen. Asegúrate de que el archivo es válido.</div>';
     }
 }
-
-
 ?>
+
 
     <div class="container mt-5">
     <h1 class="text-center mb-4">Crear producto</h1>
     <?= include "../../../includes/atras.php"; ?>
         <div class="row">
-            <form method="POST" action="crear.php" class="shadow p-4 rounded bg-dark col-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3">
+            <form method="POST" action="crear.php" enctype="multipart/form-data" class="shadow p-4 rounded bg-dark col-12 col-md-8 col-lg-6 offset-md-2 offset-lg-3">
                 <div class="mb-3">
                     <label for="nombre" class="form-label text-light">Nombre</label>
                     <input type="text" name="nombre" class="form-control" id="nombre" required>
@@ -67,9 +89,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <option value="4">Salado</option>
                     </select required>
                 </div>
-                <a href="../../index.php">
-                    <button type="submit" class="btn btn-primary w-100">Crear Producto</button>
-                </a>
+                <div class="mb-3">
+                    <label for="imagen" class="form-label text-light">Imagen del Producto</label>
+                    <input type="file" name="imagen" class="form-control" accept="image/*" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Crear Producto</button>
             </form>
         </div>
     </div>

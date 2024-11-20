@@ -1,0 +1,61 @@
+// Database ER Diagram for Cafeteria
+digraph {
+	rankdir=LR size=12
+	Productos [label=<<TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0">
+<TR><TD COLSPAN="2" BGCOLOR="lightblue"><B>Productos</B></TD></TR>
+<TR><TD>id (PK)</TD><TD>INT</TD></TR>
+<TR><TD>nombre</TD><TD>VARCHAR(100)</TD></TR>
+<TR><TD>categoria_id (FK)</TD><TD>INT</TD></TR>
+<TR><TD>descripcion</TD><TD>VARCHAR(255)</TD></TR>
+<TR><TD>apto_celiaco</TD><TD>BOOLEAN</TD></TR>
+<TR><TD>apto_vegano</TD><TD>BOOLEAN</TD></TR>
+<TR><TD>precio</TD><TD>DECIMAL(10,2)</TD></TR>
+<TR><TD>stock</TD><TD>INT</TD></TR>
+<TR><TD>imagen_url</TD><TD>VARCHAR(255)</TD></TR>
+</TABLE>>]
+	Categorias [label=<<TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0">
+<TR><TD COLSPAN="2" BGCOLOR="lightblue"><B>Categorias</B></TD></TR>
+<TR><TD>id (PK)</TD><TD>INT</TD></TR>
+<TR><TD>nombre</TD><TD>VARCHAR(100)</TD></TR>
+<TR><TD>descripcion</TD><TD>VARCHAR(255)</TD></TR>
+</TABLE>>]
+	Detalle_Pedido [label=<<TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0">
+<TR><TD COLSPAN="2" BGCOLOR="lightgreen"><B>Detalle Pedido</B></TD></TR>
+<TR><TD>id (PK)</TD><TD>INT</TD></TR>
+<TR><TD>pedido_id (FK)</TD><TD>INT</TD></TR>
+<TR><TD>producto_id (FK)</TD><TD>INT</TD></TR>
+<TR><TD>cantidad</TD><TD>INT</TD></TR>
+</TABLE>>]
+	Pedidos [label=<<TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0">
+<TR><TD COLSPAN="2" BGCOLOR="lightgreen"><B>Pedidos</B></TD></TR>
+<TR><TD>id (PK)</TD><TD>INT</TD></TR>
+<TR><TD>cliente_id (FK)</TD><TD>INT</TD></TR>
+<TR><TD>fecha_pedido</TD><TD>DATE</TD></TR>
+<TR><TD>medio_pago</TD><TD>ENUM</TD></TR>
+<TR><TD>estado_pedido</TD><TD>ENUM</TD></TR>
+<TR><TD>tipo_consumo</TD><TD>ENUM</TD></TR>
+<TR><TD>tiempo_estimado</TD><TD>INT</TD></TR>
+<TR><TD>empleado_id (FK)</TD><TD>INT</TD></TR>
+</TABLE>>]
+	Clientes [label=<<TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0">
+<TR><TD COLSPAN="2" BGCOLOR="lightcoral"><B>Clientes</B></TD></TR>
+<TR><TD>id (PK)</TD><TD>INT</TD></TR>
+<TR><TD>nombre</TD><TD>VARCHAR(100)</TD></TR>
+<TR><TD>email (UNIQUE)</TD><TD>VARCHAR(100)</TD></TR>
+<TR><TD>telefono</TD><TD>VARCHAR(15)</TD></TR>
+<TR><TD>fecha_registro</TD><TD>DATE</TD></TR>
+<TR><TD>puntos_fidelidad</TD><TD>INT</TD></TR>
+</TABLE>>]
+	Empleados [label=<<TABLE BORDER="1" CELLBORDER="1" CELLSPACING="0">
+<TR><TD COLSPAN="2" BGCOLOR="lightcoral"><B>Empleados</B></TD></TR>
+<TR><TD>id (PK)</TD><TD>INT</TD></TR>
+<TR><TD>nombre</TD><TD>VARCHAR(100)</TD></TR>
+<TR><TD>email (UNIQUE)</TD><TD>VARCHAR(100)</TD></TR>
+<TR><TD>puesto</TD><TD>VARCHAR(50)</TD></TR>
+</TABLE>>]
+	Productos -> Categorias [label="categoria_id -> id"]
+	Detalle_Pedido -> Pedidos [label="pedido_id -> id"]
+	Detalle_Pedido -> Productos [label="producto_id -> id"]
+	Pedidos -> Clientes [label="cliente_id -> id"]
+	Pedidos -> Empleados [label="empleado_id -> id"]
+}

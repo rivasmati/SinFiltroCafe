@@ -10,42 +10,42 @@ require "includes/funciones.php";
         <h2 class="text-center m-4">Nuestros Productos</h2>
         <div class="row">
             <div class="col-md-3">
-                <div class="card">
-                    <img src="img/productos/cafe-leche.png" class="img-fluid card-img-top" alt="Producto 1">
+                <div class="card h-100">
+                    <img src="img/productos/cafe-leche.png" class="img-fluid card-img-top" alt="Producto 1" style="height:250px">
                     <div class="card-body">
                         <h5 class="card-title">Café</h5>
                         <p class="card-text">Variedad de cafes, no importa el tiempo y el lugar.</p>
-                        <a href="productos.php" class="btn btn-dark">Ver más</a>
+                        <div class="d-flex justify-content-center"><a href="productos.php" class="btn btn-warning w-75 fw-bold">Ver más</a></div>
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card">
-                    <img src="img/productos/jnaranja.png" class="img-fluid card-img-top" alt="Producto 2">
+                <div class="card h-100">
+                    <img src="img/productos/jugo-naranja.png" class="img-fluid card-img-top" alt="Producto 2" style="height:250px">
                     <div class="card-body">
                         <h5 class="card-title">Bebidas</h5>
                         <p class="card-text">Suaves y refrescantes bebidas para saciar tu sed.</p>
-                        <a href="productos.php" class="btn btn-dark">Ver más</a>
+                        <div class="d-flex justify-content-center"><a href="productos.php" class="btn btn-warning w-75 fw-bold">Ver más</a></div>
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card">
-                    <img src="img/productos/crossaintc.png" class="img-fluid card-img-top" alt="Producto 3">
+                <div class="card h-100">
+                    <img src="img/productos/crossaint.png" class="img-fluid card-img-top" alt="Producto 3" style="height:250px">
                     <div class="card-body">
                         <h5 class="card-title">Dúlce</h5>
                         <p class="card-text">Acompaña tu antojo con algo dúlce.</p>
-                        <a href="productos.php" class="btn btn-dark">Ver más</a>
+                        <div class="d-flex justify-content-center"><a href="productos.php" class="btn btn-warning w-75 fw-bold">Ver más</a></div>
                     </div>
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card">
-                    <img src="img/productos/bagel.png" class="img-fluid card-img-top" alt="Producto 4" style="max-height:400px">
+                <div class="card h-100">
+                    <img src="img/productos/bagel.png" class="img-fluid card-img-top" alt="Producto 4" style="height:250px">
                     <div class="card-body">
                         <h5 class="card-title">Salado</h5>
                         <p class="card-text">Acompaña tu antojo con algo salado.</p>
-                        <a href="productos.php" class="btn btn-dark">Ver más</a>
+                        <div class="d-flex justify-content-center"><a href="productos.php" class="btn btn-warning w-75 fw-bold">Ver más</a></div>
                     </div>
                 </div>
             </div>

@@ -19,9 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ':telefono' => $telefono,
             ':fecha_registro' => $fecha_registro,
         ]);
-        header("refresh:2;url=../../clientes.php");
-        echo '<div class="alert alert-success">Cliente creado exitosamente.</div>';
 
+        echo '<div class="alert alert-success">Cliente creado exitosamente.</div>';
+        echo '<script>setTimeout(() => { window.location.href = "../../clientes.php"; }, 1500);</script>';
     } catch (PDOException $e) {
         echo '<div class="alert alert-danger">Error al crear el cliente: ' . $e->getMessage() . '</div>';
     }

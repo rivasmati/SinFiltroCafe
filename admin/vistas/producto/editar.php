@@ -42,8 +42,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ':stock' => $stock,
             ':categoria_id' => $categoria_id
         ]);
-        header("refresh:2;url=../../index.php");
         echo '<div class="alert alert-success align-items-center">Producto actualizado exitosamente.</div>';
+        echo '<script>setTimeout(() => { window.location.href = "../../productos.php"; }, 1500);</script>';
     } catch (PDOException $e) {
         echo '<div class="alert alert-danger">Error al actualizar el producto: ' . $e->getMessage() . '</div>';
     }
