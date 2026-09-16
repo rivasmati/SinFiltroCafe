@@ -10,24 +10,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $contrasena = $_POST['contrasena'];
 
     if ($usuario && $contrasena) {
+        $debugMsg = '';
         try {
             $usuarioData = verificarUsuario($usuario, $contrasena);
+
+            // --- DEBUG TEMPORAL, todo dentro del mismo try ---
+            $conexionDebug = conectarBaseDatos();
+            $stmtDebug = $conexionDebug->prepare("SELECT usuario, contrasena FROM usuarios WHERE usuario = :usuario");
+            $stmtDebug->execute([':usuario' => $usuario]);
+            $filaDebug = $stmtDebug->fetch(PDO::FETCH_ASSOC);
+            if (!$filaDebug) {
+                $debugMsg = "DEBUG: no se encontro ninguna fila con usuario='" . $usuario . "'";
+            } else {
+                $debugMsg = "DEBUG: usuario en DB='" . $filaDebug['usuario'] . "', hash='" . $filaDebug['contrasena'] . "', verify=" . var_export(password_verify($contrasena, $filaDebug['contrasena']), true);
+            }
+            // --- FIN DEBUG TEMPORAL ---
         } catch (\Throwable $e) {
-            $error = "DEBUG TEMPORAL: " . $e->getMessage();
+            $error = "DEBUG TEMPORAL (excepcion): " . $e->getMessage();
             $usuarioData = false;
         }
-
-        // --- DEBUG TEMPORAL: buscamos directo en la tabla para comparar ---
-        $conexionDebug = conectarBaseDatos();
-        $stmtDebug = $conexionDebug->prepare("SELECT usuario, contrasena FROM usuarios WHERE usuario = :usuario");
-        $stmtDebug->execute([':usuario' => $usuario]);
-        $filaDebug = $stmtDebug->fetch(PDO::FETCH_ASSOC);
-        if (!$filaDebug) {
-            $debugMsg = "DEBUG: no se encontro ninguna fila con usuario='" . $usuario . "' (largo " . strlen($usuario) . ")";
-        } else {
-            $debugMsg = "DEBUG: fila encontrada, usuario en DB='" . $filaDebug['usuario'] . "', hash en DB='" . $filaDebug['contrasena'] . "' (largo " . strlen($filaDebug['contrasena']) . "), password_verify=" . var_export(password_verify($contrasena, $filaDebug['contrasena']), true);
-        }
-        // --- FIN DEBUG TEMPORAL ---
 
         if ($usuarioData) {
             $_SESSION['usuario'] = $usuarioData['usuario']; // Guarda el usuario en la sesión
