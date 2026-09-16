@@ -10,7 +10,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $contrasena = $_POST['contrasena'];
 
     if ($usuario && $contrasena) {
-        $usuarioData = verificarUsuario($usuario, $contrasena);
+        try {
+            $usuarioData = verificarUsuario($usuario, $contrasena);
+        } catch (\Throwable $e) {
+            $error = "DEBUG TEMPORAL: " . $e->getMessage();
+            $usuarioData = false;
+        }
         if ($usuarioData) {
             $_SESSION['usuario'] = $usuarioData['usuario']; // Guarda el usuario en la sesión
             header("Location: ./index.php"); // Redirecciona a index.php en caso de éxito
