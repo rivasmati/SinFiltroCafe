@@ -154,8 +154,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `usuario`, `contrasena`) VALUES
-(1, 'admin', 'admin'),
-(2, 'user', '123456');
+(1, 'admin', '$2y$12$eOB0hrR8NOmC0wll3uM.0O3RFXQl9.Yx/4R3UrPiw7KemOgzELBQe'),
+(2, 'user', '$2y$12$5C34Kipa4PnTIkWSHVtHO.z/AOORvqg5ghUG3Kg7qyIlwDFZc1wF.');
 
 --
 -- Índices para tablas volcadas

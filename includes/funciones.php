@@ -89,14 +89,17 @@ function obtenerProductosConStock() {
 // Función para verificar usuario y contraseña en la base de datos
 function verificarUsuario($usuario, $contrasena) {
     $conexion = conectarBaseDatos(); // Conecta a la base de datos
-    $sql = "SELECT * FROM usuarios WHERE usuario = :usuario AND contrasena = :contrasena";
+    $sql = "SELECT * FROM usuarios WHERE usuario = :usuario";
     $stmt = $conexion->prepare($sql);
-    $stmt->execute([
-        ':usuario' => $usuario,
-        ':contrasena' => $contrasena // Aquí usamos contraseñas simples, considera hashes en el futuro
-    ]);
+    $stmt->execute([':usuario' => $usuario]);
+    $usuarioData = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    return $stmt->fetch(PDO::FETCH_ASSOC); // Devuelve el usuario si coincide, o falso si no
+    // La contraseña se guarda hasheada (password_hash); nunca en texto plano.
+    if ($usuarioData && password_verify($contrasena, $usuarioData['contrasena'])) {
+        return $usuarioData;
+    }
+
+    return false;
 }
 
 ?>

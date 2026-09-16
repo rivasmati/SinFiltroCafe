@@ -64,8 +64,8 @@ CREATE TABLE Usuarios (
 );
 
 INSERT INTO Usuarios (usuario, contrasena) VALUES
-    ('admin', 'admin'),  -- Usuario administrador 1
-    ('user', '123456');  -- Usuario administrador 2
+    ('admin', '$2y$12$eOB0hrR8NOmC0wll3uM.0O3RFXQl9.Yx/4R3UrPiw7KemOgzELBQe'),  -- Usuario administrador 1 (password real: admin)
+    ('user', '$2y$12$5C34Kipa4PnTIkWSHVtHO.z/AOORvqg5ghUG3Kg7qyIlwDFZc1wF.');  -- Usuario administrador 2 (password real: 123456)
 
 INSERT INTO Categorias (id, nombre, descripcion) VALUES
     (1, 'Café', 'Productos a base de café'),

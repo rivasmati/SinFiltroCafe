@@ -1,4 +1,7 @@
 <?php
+require_once "../includes/auth.php";
+verificarSesionAdmin();
+
 require_once "../includes/header.php";
 require_once "../includes/database.php";
 require "../includes/funciones.php";
