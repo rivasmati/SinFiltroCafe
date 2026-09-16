@@ -1,16 +1,12 @@
 <?php
 
+require_once __DIR__ . "/config.php";
+
 // Función para conectar a la base de datos
 function conectarBaseDatos() {
-    // Parámetros de conexión
-    $host = "localhost";
-    $usuario = "root";  // Cambia según tu configuración
-    $password = "";  // Introduce tu contraseña
-    $dbname = "cafeteria";
-
     try {
-        // Crear la conexión usando PDO
-        $conexion = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $usuario, $password);
+        // Crear la conexión usando PDO, con los datos de config.php
+        $conexion = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8", DB_USER, DB_PASS);
         $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         return $conexion;
     } catch (PDOException $e) {

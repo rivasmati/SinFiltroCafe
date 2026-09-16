@@ -1,0 +1,5 @@
+# Credenciales locales, no se comparten por git
+includes/config.php
+
+# Archivos de sistema
+.DS_Store
