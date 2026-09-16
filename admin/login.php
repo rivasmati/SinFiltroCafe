@@ -16,12 +16,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $error = "DEBUG TEMPORAL: " . $e->getMessage();
             $usuarioData = false;
         }
+
+        // --- DEBUG TEMPORAL: buscamos directo en la tabla para comparar ---
+        $conexionDebug = conectarBaseDatos();
+        $stmtDebug = $conexionDebug->prepare("SELECT usuario, contrasena FROM usuarios WHERE usuario = :usuario");
+        $stmtDebug->execute([':usuario' => $usuario]);
+        $filaDebug = $stmtDebug->fetch(PDO::FETCH_ASSOC);
+        if (!$filaDebug) {
+            $debugMsg = "DEBUG: no se encontro ninguna fila con usuario='" . $usuario . "' (largo " . strlen($usuario) . ")";
+        } else {
+            $debugMsg = "DEBUG: fila encontrada, usuario en DB='" . $filaDebug['usuario'] . "', hash en DB='" . $filaDebug['contrasena'] . "' (largo " . strlen($filaDebug['contrasena']) . "), password_verify=" . var_export(password_verify($contrasena, $filaDebug['contrasena']), true);
+        }
+        // --- FIN DEBUG TEMPORAL ---
+
         if ($usuarioData) {
             $_SESSION['usuario'] = $usuarioData['usuario']; // Guarda el usuario en la sesión
             header("Location: ./index.php"); // Redirecciona a index.php en caso de éxito
             exit;
         } else {
-            $error = "Usuario o contraseña incorrectos."; // Mensaje de error si las credenciales no coinciden
+            $error = "Usuario o contraseña incorrectos. " . ($debugMsg ?? ''); // Mensaje de error si las credenciales no coinciden
         }
     } else {
         $error = "Por favor, completa ambos campos.";
