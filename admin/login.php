@@ -34,8 +34,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['usuario'] = $usuarioData['usuario']; // Guarda el usuario en la sesión
             header("Location: ./index.php"); // Redirecciona a index.php en caso de éxito
             exit;
-        } else {
-            $error = "Usuario o contraseña incorrectos. " . ($debugMsg ?? ''); // Mensaje de error si las credenciales no coinciden
+        } elseif ($error === '') {
+            // Solo pisar el mensaje si no hubo excepcion (si hubo, ya quedo en $error)
+            $error = "Usuario o contraseña incorrectos. " . ($debugMsg ?? '');
         }
     } else {
         $error = "Por favor, completa ambos campos.";
