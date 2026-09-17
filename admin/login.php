@@ -10,37 +10,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $contrasena = $_POST['contrasena'];
 
     if ($usuario && $contrasena) {
-        $debugMsg = '';
-        try {
-            $usuarioData = verificarUsuario($usuario, $contrasena);
-
-            // --- DEBUG TEMPORAL, todo dentro del mismo try ---
-            $conexionDebug = conectarBaseDatos();
-            $stmtDebug = $conexionDebug->prepare("SELECT usuario, contrasena FROM usuarios WHERE usuario = :usuario");
-            $stmtDebug->execute([':usuario' => $usuario]);
-            $filaDebug = $stmtDebug->fetch(PDO::FETCH_ASSOC);
-            $stmtCount = $conexionDebug->prepare("SELECT COUNT(*) AS total FROM usuarios");
-            $stmtCount->execute();
-            $totalFilas = $stmtCount->fetch(PDO::FETCH_ASSOC)['total'];
-            $infoConexion = "DB_HOST=" . DB_HOST . " DB_NAME=" . DB_NAME . " total_usuarios=" . $totalFilas;
-            if (!$filaDebug) {
-                $debugMsg = "DEBUG [$infoConexion]: no se encontro ninguna fila con usuario='" . $usuario . "'";
-            } else {
-                $debugMsg = "DEBUG [$infoConexion]: usuario en DB='" . $filaDebug['usuario'] . "', hash='" . $filaDebug['contrasena'] . "', verify=" . var_export(password_verify($contrasena, $filaDebug['contrasena']), true);
-            }
-            // --- FIN DEBUG TEMPORAL ---
-        } catch (\Throwable $e) {
-            $error = "DEBUG TEMPORAL (excepcion): " . $e->getMessage();
-            $usuarioData = false;
-        }
+        $usuarioData = verificarUsuario($usuario, $contrasena);
 
         if ($usuarioData) {
             $_SESSION['usuario'] = $usuarioData['usuario']; // Guarda el usuario en la sesión
             header("Location: ./index.php"); // Redirecciona a index.php en caso de éxito
             exit;
-        } elseif ($error === '') {
-            // Solo pisar el mensaje si no hubo excepcion (si hubo, ya quedo en $error)
-            $error = "Usuario o contraseña incorrectos. " . ($debugMsg ?? '');
+        } else {
+            $error = "Usuario o contraseña incorrectos.";
         }
     } else {
         $error = "Por favor, completa ambos campos.";
