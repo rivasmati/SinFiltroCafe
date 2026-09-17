@@ -19,10 +19,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $stmtDebug = $conexionDebug->prepare("SELECT usuario, contrasena FROM usuarios WHERE usuario = :usuario");
             $stmtDebug->execute([':usuario' => $usuario]);
             $filaDebug = $stmtDebug->fetch(PDO::FETCH_ASSOC);
+            $stmtCount = $conexionDebug->prepare("SELECT COUNT(*) AS total FROM usuarios");
+            $stmtCount->execute();
+            $totalFilas = $stmtCount->fetch(PDO::FETCH_ASSOC)['total'];
+            $infoConexion = "DB_HOST=" . DB_HOST . " DB_NAME=" . DB_NAME . " total_usuarios=" . $totalFilas;
             if (!$filaDebug) {
-                $debugMsg = "DEBUG: no se encontro ninguna fila con usuario='" . $usuario . "'";
+                $debugMsg = "DEBUG [$infoConexion]: no se encontro ninguna fila con usuario='" . $usuario . "'";
             } else {
-                $debugMsg = "DEBUG: usuario en DB='" . $filaDebug['usuario'] . "', hash='" . $filaDebug['contrasena'] . "', verify=" . var_export(password_verify($contrasena, $filaDebug['contrasena']), true);
+                $debugMsg = "DEBUG [$infoConexion]: usuario en DB='" . $filaDebug['usuario'] . "', hash='" . $filaDebug['contrasena'] . "', verify=" . var_export(password_verify($contrasena, $filaDebug['contrasena']), true);
             }
             // --- FIN DEBUG TEMPORAL ---
         } catch (\Throwable $e) {
