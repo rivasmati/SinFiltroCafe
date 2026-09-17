@@ -73,7 +73,57 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         
         if ($origen === 'pedido') {
-            echo '<script>setTimeout(() => { window.location.href = "../../../index.php"; }, 100);</script>';
+            // Traer el detalle real del pedido recien creado para mostrar una confirmacion con numero, productos y total
+            $sqlConfirmacion = "SELECT p.nombre, p.precio, dp.cantidad, (p.precio * dp.cantidad) AS subtotal
+                                 FROM detalle_pedido dp
+                                 JOIN productos p ON p.id = dp.producto_id
+                                 WHERE dp.pedido_id = :pedido_id";
+            $stmtConfirmacion = $conexion->prepare($sqlConfirmacion);
+            $stmtConfirmacion->execute([':pedido_id' => $pedidoId]);
+            $detalleConfirmacion = $stmtConfirmacion->fetchAll(PDO::FETCH_ASSOC);
+            $totalPedido = array_sum(array_column($detalleConfirmacion, 'subtotal'));
+            ?>
+            <div class="container mt-5 mb-5">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-8 col-lg-6">
+                        <div class="card shadow">
+                            <div class="card-body text-center">
+                                <h2 class="text-success mb-3">¡Pedido confirmado!</h2>
+                                <p class="mb-1">Número de pedido: <strong>#<?= htmlspecialchars($pedidoId) ?></strong></p>
+                                <p class="mb-4">Gracias, <?= htmlspecialchars($nombre) ?>. Te esperamos en el local.</p>
+                                <table class="table table-dark table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Producto</th>
+                                            <th>Cant.</th>
+                                            <th>Subtotal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php foreach ($detalleConfirmacion as $item): ?>
+                                        <tr>
+                                            <td><?= htmlspecialchars($item['nombre']) ?></td>
+                                            <td><?= htmlspecialchars($item['cantidad']) ?></td>
+                                            <td>$<?= number_format($item['subtotal'], 2) ?></td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="2">Total</th>
+                                            <th>$<?= number_format($totalPedido, 2) ?></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                                <p>Estado: <span class="badge bg-warning text-dark"><?= htmlspecialchars($estado_pedido) ?></span></p>
+                                <a href="../../../index.php" class="btn btn-primary mt-3">Volver al inicio</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
+            require_once "../../../includes/footer.php";
         } else {
             echo '<div class="alert alert-success align-items-center">Pedido creado exitosamente.</div>';
             echo '<script>setTimeout(() => { window.location.href = "../../pedidos.php"; }, 1500);</script>';
