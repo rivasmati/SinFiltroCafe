@@ -56,8 +56,15 @@ $(document).ready(function() {
                         cartEmpty: 'Carrito vacío!<br />Elegí tus productos.'
                     },  
                     cartItemTemplate: 
-                    '<h4 class="list-group-item-heading">{product_name}</h4> <input type="hidden" name="productos[${productIndex++}][producto_id]" value="{product_id}" /> <input type="hidden" name="productos[${productIndex++}][cantidad]" value="{display_quantity}"/>',    
+                    '<h4 class="list-group-item-heading">{product_name}</h4> <input type="hidden" name="productos[${productIndex++}][producto_id]" value="{product_id}" /> <input type="hidden" name="productos[${productIndex++}][cantidad]" value="{product_quantity}"/>',    
                 })
+
+                // El input de cantidad visible dentro del carrito no actualiza el campo oculto
+                // que se envia en el formulario, asi que lo sincronizamos manualmente.
+                $(document).on('input change', '#smartcart .sc-cart-item-qty', function() {
+                    const nuevaCantidad = $(this).val();
+                    $(this).closest('.sc-cart-item').find('input[name$="[cantidad]"]').val(nuevaCantidad);
+                });
         },
         error: function(xhr, status, error) {
             console.error('Error al cargar los productos:', error);
